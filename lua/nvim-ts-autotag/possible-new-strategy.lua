@@ -51,8 +51,8 @@ local function get_root()
 end
 
 --- Recursively walks the tree and collects all the element nodes
---- @param node TSNode
---- @param elements TSNode[]
+--- @param node TSNode The current node to walk
+--- @param elements TSNode[] The list of elements to collect
 --- @return TSNode[]
 local function walk_tree(node, elements)
   for child in node:iter_children() do
@@ -66,7 +66,7 @@ local function walk_tree(node, elements)
 end
 
 --- Collects all the element nodes from the root node
---- @param root TSNode
+--- @param root TSNode The root node of the tree
 --- @return TSNode[]
 local function get_elements(root)
   --- @type TSNode[]
@@ -76,7 +76,7 @@ local function get_elements(root)
 end
 
 --- Takes a given node and returns the pos and text of the start and end tags
---- @param node TSNode
+--- @param node TSNode The element node to get the tag info from
 --- @return TagPosition
 local function get_tag_info(node)
   local position = {}
@@ -109,7 +109,7 @@ local function get_tag_info(node)
 end
 
 --- Gets all tag positions from a list of element nodes
---- @param elements TSNode[]
+--- @param elements TSNode[] The list of element nodes to get the tag positions from
 --- @return TagPosition[]
 local function get_all_tag_positions(elements)
   --- @type TagPosition[]
@@ -133,7 +133,7 @@ local positions = {}
 
 --- This function will be called when the `TextChanged` autocmd is triggered.
 --- It should interrogate the two tables to determine if a tag has been changed and react accordingly.
---- @param new_positions TagPosition[]
+--- @param new_positions TagPosition[] The new tag positions to compare with the current positions
 --- @return TagPosition[]
 local function update_on_change(new_positions)
   for _, new_pos in ipairs(new_positions) do
